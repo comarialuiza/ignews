@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header className={ styles.headerContainer }>
             <div className={ styles.headerContent }>
-                <Image src='/images/logo.svg' alt='Ignews' height='100px' width='100px'/>
+                <img src='/images/logo.svg' alt='Ignews' />
 
                 <nav>
                     <a className={ styles.active }>Home</a>
