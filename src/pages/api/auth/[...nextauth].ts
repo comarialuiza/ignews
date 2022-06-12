@@ -28,18 +28,19 @@ export default NextAuth({
                         ),
                         q.Create(
                             q.Collection('users'),
-                            { data: { email }}
+                            { data: { email } }
                         ),
                         q.Get(
-                            q.Index('user_by_email'),
-                            q.Casefold(email)
+                            q.Match(
+                                q.Index('user_by_email'),
+                                q.Casefold(email)
+                            )
                         )
                     )
                 );
-
+    
                 return true;
-            } catch (err) {
-                console.log(err);
+            } catch(err) {
                 return false;
             }
         }
