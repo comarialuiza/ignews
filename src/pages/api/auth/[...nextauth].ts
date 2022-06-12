@@ -4,6 +4,7 @@ import fauna from '../../../services/fauna';
 import { query as q } from 'faunadb';
 
 export default NextAuth({
+    debug: true,
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_CLIENT_ID,
@@ -21,7 +22,7 @@ export default NextAuth({
                             q.Exists(
                                 q.Match(
                                     q.Index('user_by_email'),
-                                    q.Casefold(user.email)
+                                    q.Casefold(email)
                                 )
                             )
                         ),
@@ -31,13 +32,14 @@ export default NextAuth({
                         ),
                         q.Get(
                             q.Index('user_by_email'),
-                            q.Casefold(user.email)
+                            q.Casefold(email)
                         )
                     )
                 );
 
                 return true;
             } catch (err) {
+                console.log(err);
                 return false;
             }
         }
